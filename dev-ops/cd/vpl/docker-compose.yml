@@ -55,6 +55,8 @@ services:
       - RABBIT_MQ:VIRTUAL_HOST=vpl-prd
       - RABBIT_MQ:USER_NAME=vpl
       - RABBIT_MQ:PASSWORD=12345678
+    depends_on:
+      - vehicles-api
     restart: always
 
   vehicles-api:
