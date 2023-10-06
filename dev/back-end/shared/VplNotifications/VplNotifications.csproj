@@ -17,7 +17,6 @@
     <None Remove="Messages\Evaluations\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Messages\" />
     <Folder Include="Messages\Evaluations\" />
   </ItemGroup>
 </Project>

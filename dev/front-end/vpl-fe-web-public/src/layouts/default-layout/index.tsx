@@ -12,12 +12,19 @@ const DefaultLayout = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
-        const newConnection = new HubConnectionBuilder()
+        const evaluationsConnect = new HubConnectionBuilder()
             .withUrl(`${import.meta.env.VITE_NOTIFICATION_URL}/hubs/evaluations`)
             .withAutomaticReconnect()
             .build();
 
-        setConnection(newConnection);
+        setConnection(evaluationsConnect);
+
+        const vehiclesConnect = new HubConnectionBuilder()
+            .withUrl(`${import.meta.env.VITE_NOTIFICATION_URL}/hubs/vehicles`)
+            .withAutomaticReconnect()
+            .build();
+
+        setConnection(vehiclesConnect);
     }, []);
 
     useEffect(() => {
@@ -29,6 +36,14 @@ const DefaultLayout = () => {
                     });
 
                     connection.on('EvaluationUpdated', (message: string) => {
+                        enqueueSnackbar(message, { variant: 'info' })
+                    });
+
+                    connection.on('VehicleCreated', (message: string) => {
+                        enqueueSnackbar(message, { variant: 'info' })
+                    });
+
+                    connection.on('VehicleUpdated', (message: string) => {
                         enqueueSnackbar(message, { variant: 'info' })
                     });
 

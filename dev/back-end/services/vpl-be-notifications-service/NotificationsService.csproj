@@ -26,8 +26,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\" />
-    <Folder Include="App\Consumers\" />
     <Folder Include="App\Consumers\Evaluations\" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 
+using MassTransit;
+
 using MediatR;
 
 using VehiclesService.App.Commands.Vehicles;
@@ -7,6 +9,8 @@ using VehiclesService.Domain.Contracts;
 using VehiclesService.Domain.Enums;
 using VehiclesService.Domain.Models;
 using VehiclesService.Domain.ViewModels.Vehicles;
+
+using VplNotifications.Messages.Vehicles;
 
 namespace VehiclesService.App.Commands.Vehicles
 {
@@ -23,15 +27,23 @@ namespace VehiclesService.App.Commands.Vehicles
         {
             private readonly IUnitOfWork _uow;
             private readonly IMapper _mapper;
-            public CreateVehicleCommandHandler(IUnitOfWork uow, IMapper mapper)
+            private readonly IBus _bus;
+
+            public CreateVehicleCommandHandler(IUnitOfWork uow, IMapper mapper, IBus bus)
             {
                 _uow = uow;
                 _mapper = mapper;
+                _bus = bus;
             }
 
             public async Task<VehicleVm> Handle(CreateVehicleCommand request, CancellationToken cancellationToken)
             {
-                var vehicle = new Vehicle(request.BrandId, request.ModelId, request.Name, request.ProductionYear, request.ModelYear, request.Type);
+                var vehicle = new Vehicle(request.BrandId,
+                                          request.ModelId,
+                                          request.Name,
+                                          request.ProductionYear,
+                                          request.ModelYear,
+                                          request.Type);
 
                 if (!vehicle.Validate())
                     throw new Exception("Veiculo inválida.");
@@ -40,6 +52,11 @@ namespace VehiclesService.App.Commands.Vehicles
 
                 await _uow.Commit();
 
+                await _bus.Publish(new VehicleCreatedMessage
+                {
+                    Message = $"Foi cadastrado um novo {vehicle.Name}"
+                }, cancellationToken);
+                
                 return _mapper.Map<VehicleVm>(vehicle);
             }
         }

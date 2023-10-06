@@ -38,8 +38,7 @@ export class VehicleFormComponent {
     private _router: Router,
     private _route: ActivatedRoute,
     private _brandService: BrandService,
-    private _modelService: ModelService,
-    private _vehicleHubService: VehicleHubService
+    private _modelService: ModelService
   ) { }
 
   ngOnInit(): void {
@@ -130,17 +129,8 @@ export class VehicleFormComponent {
       req.subscribe({
         next: _ => {
           this._router.navigate(['/vehicles']);
-                    
-          if (!this.id)
-            this._vehicleHubService.sendCreated(`Foi inserido um novo veículo: ${vehicle.name}.`);
-          else
-            this._vehicleHubService.sendUpdated(`Foi atualizado os dados do veículo: ${vehicle.name}`);
-
-          this._snackBar.open('Veículo salvo com sucesso!', 'Ok');
         },
         error: (err: any) => {
-          this._snackBar.open(err, 'Ok');
-
           this.isLoading = false;
         }
       });
