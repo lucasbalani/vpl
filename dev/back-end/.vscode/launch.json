@@ -1,0 +1,86 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ApiGateway",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/gateways/vpl-be-api-gateway/bin/Debug/net7.0/ApiGateway.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/gateways/vpl-be-api-gateway",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "AuthService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/services/vpl-be-auth-service/bin/Debug/net6.0/AuthService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/vpl-be-auth-service",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "NotificationsService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/services/vpl-be-notifications-service/bin/Debug/net7.0/NotificationsService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/vpl-be-notifications-service",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "PriceListsService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/services/vpl-be-price-lists-service/bin/Debug/net7.0/PriceListsService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/vpl-be-price-lists-service",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "VehiclesService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/services/vpl-be-vehicles-service/bin/Debug/net7.0/VehiclesService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/vpl-be-vehicles-service",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+    ],
+    "compounds": [
+        {
+            "name": "All Services",
+            "configurations": [
+                "ApiGateway",
+                "AuthService",
+                "NotificationsService",
+                "PriceListsService",
+                "VehiclesService",
+            ],
+            "stopAll": true
+        }
+    ]
+}

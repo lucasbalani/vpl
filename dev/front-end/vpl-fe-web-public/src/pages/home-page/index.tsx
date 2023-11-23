@@ -1,3 +1,5 @@
+'use client'
+
 import { Search } from "@mui/icons-material";
 import { Cancel } from "@mui/icons-material";
 import { Divider, Grid, IconButton, TextField, Typography } from "@mui/material";
@@ -16,8 +18,6 @@ import BrandCard from "../brands-page/brand-card";
 import ModelCard from "../models-page/model-card";
 import HomeCard from "./home-card";
 import useTablesMenu from "../../hooks/menu/use-tables-menu";
-import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import SEO from "../../components/seo";
 import VehicleCard from "../vehicles-page/Vehicle-card";
 
